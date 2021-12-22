@@ -4,8 +4,8 @@ from django.db import models
 
 
 class RoleUser(models.TextChoices):
-    STUDENT = 'Ученик'
-    TEACHER = 'Учитель'
+    STUDENT = 'student'
+    TEACHER = 'teacher'
 
 
 class User(AbstractUser):
@@ -13,10 +13,6 @@ class User(AbstractUser):
                             choices=RoleUser.choices,
                             default=RoleUser.STUDENT)
 
-    last_name = models.CharField(blank=False, max_length=50,
-                                 verbose_name='Фамилия')
-    first_name = models.CharField(blank=False, max_length=50,
-                                  verbose_name='Имя')
     middle_name = models.CharField(blank=False, max_length=50,
                                    verbose_name='Отчество')
     birth_date = models.DateField(blank=False, null=True,
