@@ -1,14 +1,21 @@
-from django.contrib.auth import get_user_model
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework import mixins, viewsets
 
-from .permissions import AdminPermission
+from .models import Student, User
+from .permissions import TeacherPermission
+from .serializers import StudentSerializer, UserSerializer
 
 
-class DeleteAccount(APIView):
-    permission_classes = [AdminPermission]
+class CustomViewSet(
+    mixins.CreateModelMixin,
+    mixins.DestroyModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
+):
+    pass
 
-    def delete(self, request, *args, **kwargs):
-        user = request.user
-        user.delete()
-        return Response({"result": "user delete"})
+
+class UserViewSet(CustomViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [TeacherPermission]
+    search_fields = ['last_name', 'first_name', 'middle_name']
