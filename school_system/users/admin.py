@@ -11,8 +11,8 @@ class UserAdmin(DjangoUserAdmin):
     fieldsets = DjangoUserAdmin.fieldsets + ((None, {
         'fields': ('role', 'middle_name',
                    'birth_date')}),)
-    list_display = ('role', 'last_name', 'first_name', 'middle_name',
-                    'birth_date', 'is_staff')
+    list_display = ('role', 'last_name', 'first_name',
+                    'middle_name', 'birth_date')
 
     def save_model(self, request, obj, form, change):
         if request.user.is_teacher:
@@ -27,6 +27,7 @@ class StudentUser(UserAdmin):
     model = Student
     fieldsets = UserAdmin.fieldsets + ((None, {
         'fields': ('entry_year', 'klass')}),)
+
     list_display = ('role', 'last_name', 'first_name',
                     'middle_name', 'birth_date',
                     'entry_year', 'klass', 'is_staff')
