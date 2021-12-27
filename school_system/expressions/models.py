@@ -30,7 +30,6 @@ def my_eval(numbers, operators):
                '/': operator.floordiv,
                '+': operator.add,
                '-': operator.sub}
-    Value = None
 
     for op in operator_order:
         while any(o in operators for o in op):
