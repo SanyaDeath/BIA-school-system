@@ -50,6 +50,7 @@ class Student(User):
         verbose_name_plural = 'Студенты'
 
     def __str__(self):
-        return '{} {} {}'.format(self.last_name,
-                                 self.first_name,
-                                 self.middle_name)
+        return '{} {} {} - {}'.format(self.last_name,
+                                      self.first_name,
+                                      self.middle_name,
+                                      self.klass)
