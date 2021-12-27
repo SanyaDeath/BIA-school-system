@@ -1,3 +1,5 @@
+![BIA-school-system workflow](https://github.com/SanyaDeath/BIA-school-system/actions/workflows/main.yml/badge.svg)
+
 # BIA-school-system
 
 Необходимо разработать систему для помощи школьникам в процессе изучения математики
