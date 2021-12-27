@@ -1,4 +1,5 @@
 import operator
+
 from django.db import models
 
 from users.models import Student
@@ -30,7 +31,6 @@ def my_eval(numbers, operators):
                '/': operator.floordiv,
                '+': operator.add,
                '-': operator.sub}
-    Value = None
 
     for op in operator_order:
         while any(o in operators for o in op):
@@ -50,7 +50,6 @@ class Expression(models.Model):
     expr = models.CharField(max_length=255,
                             help_text='Введите выражение',
                             verbose_name='Выражение')
-
     result = models.FloatField(help_text='Введите ожидаемый результат',
                                verbose_name='Результат')
     actual_result = models.FloatField(blank=True,

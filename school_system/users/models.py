@@ -23,13 +23,13 @@ class User(AbstractUser):
         verbose_name = 'Учитель'
         verbose_name_plural = 'Учителя и студенты'
 
-    # @property
-    # def is_admin(self):
-    #     return (self.role == RoleUser.ADMIN or self.is_superuser)
+    @property
+    def is_admin(self):
+        return (self.role == RoleUser.ADMIN or self.is_superuser)
 
-    # @property
-    # def is_teacher(self):
-    #     return (self.role == RoleUser.TEACHER or self.is_staff)
+    @property
+    def is_teacher(self):
+        return (self.role == RoleUser.TEACHER or self.is_staff)
 
     def __str__(self):
         return '{} {} {}'.format(self.last_name,
@@ -39,7 +39,7 @@ class User(AbstractUser):
 
 class Student(User):
     entry_year = models.IntegerField(blank=False, null=True,
-                                     validators=[MinValueValidator(2010),
+                                     validators=[MinValueValidator(1900),
                                                  MaxValueValidator(2021)],
                                      verbose_name='Год поступления')
     klass = models.CharField(blank=False, max_length=3,
@@ -50,6 +50,7 @@ class Student(User):
         verbose_name_plural = 'Студенты'
 
     def __str__(self):
-        return '{} {} {}'.format(self.last_name,
-                                 self.first_name,
-                                 self.middle_name)
+        return '{} {} {} - {}'.format(self.last_name,
+                                      self.first_name,
+                                      self.middle_name,
+                                      self.klass)
