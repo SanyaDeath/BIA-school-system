@@ -23,16 +23,18 @@ class User(AbstractUser):
         verbose_name = 'Учитель'
         verbose_name_plural = 'Учителя и студенты'
 
-    @property
-    def is_admin(self):
-        return (self.role == RoleUser.ADMIN or self.is_superuser)
+    # @property
+    # def is_admin(self):
+    #     return (self.role == RoleUser.ADMIN or self.is_superuser)
 
-    @property
-    def is_teacher(self):
-        return (self.role == RoleUser.TEACHER or self.is_staff)
+    # @property
+    # def is_teacher(self):
+    #     return (self.role == RoleUser.TEACHER or self.is_staff)
 
     def __str__(self):
-        return self.last_name
+        return '{} {} {}'.format(self.last_name,
+                                 self.first_name,
+                                 self.middle_name)
 
 
 class Student(User):
@@ -47,9 +49,7 @@ class Student(User):
         verbose_name = 'Студент'
         verbose_name_plural = 'Студенты'
 
-    @property
-    def is_student(self):
-        return (self.role == RoleUser.STUDENT or self.is_staff)
-
     def __str__(self):
-        return self.last_name
+        return '{} {} {}'.format(self.last_name,
+                                 self.first_name,
+                                 self.middle_name)
