@@ -30,7 +30,7 @@ class StudentUser(UserAdmin):
 
     list_display = ('role', 'last_name', 'first_name',
                     'middle_name', 'birth_date',
-                    'entry_year', 'klass', 'is_staff')
+                    'entry_year', 'klass')
     search_fields = ('last_name', 'first_name',
                      'middle_name', 'entry_year', 'klass')
 
