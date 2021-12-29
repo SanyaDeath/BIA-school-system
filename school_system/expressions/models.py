@@ -1,6 +1,7 @@
 import operator
 
 from django.db import models
+from django.db.models import Count
 
 from users.models import Student
 
@@ -52,8 +53,8 @@ class Expression(models.Model):
                             verbose_name='Выражение')
     result = models.FloatField(help_text='Введите ожидаемый результат',
                                verbose_name='Результат')
-    actual_result = models.FloatField(blank=True,
-                                      verbose_name='Истинный результат')
+
+    actual_result = models.FloatField(verbose_name='Истинный результат')
     is_valid = models.BooleanField(blank=True, default=False,
                                    verbose_name='Ответ правильный')
 
@@ -65,3 +66,13 @@ class Expression(models.Model):
         self.actual_result = my_eval(*parse(self.expr))
         self.is_valid = self.actual_result == self.result
         return super(Expression, self).save(*args, **kwargs)
+
+    @property
+    def positive_amount(self):
+        return Expression.objects.filter(is_valid=True).values(
+            'user').annotate(total=Count('is_valid'))
+
+    @property
+    def negative_amount(self):
+        return Expression.objects.filter(is_valid=False).values(
+            'user').annotate(total=Count('is_valid'))
