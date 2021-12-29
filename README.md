@@ -44,17 +44,17 @@ https://docs.docker.com/engine/install/
 ### Миграции
 ``` docker-compose exec python manage.py migrate --noinput ``` Shell
 
-### Введите команду для создания суперпользователя:
+### Введите команду для создания суперпользователя
 ``` docker-compose exec web python manage.py createsuperuser ``` Shell
 
-### Введите команду для создания групп пользователей с правами:
+### Введите команду для создания групп пользователей с правами
 ``` docker-compose exec web python manage.py create_group ``` Shell
 
 ### Заполнения базы начальными данными
 ``` docker-compose exec web python manage.py loaddata fixtures/data.json ``` Shell
 
 
-### При переходе на http://127.0.0.1:8000/ появится окно для логина
+### При переходе на http://127.0.0.1/ появится окно для логина
 ### данные для входа  
 ``` 
 имя пользователя: teacher / student
@@ -63,4 +63,4 @@ https://docs.docker.com/engine/install/
 ## подсказка:
 ``` при создании нового учителя или студента определите его в одну из соотвествующих групп (techers для учителей, students для учеников соответсвенно) ```
 
-### что не успел реализовать: Поддержку скобок в выражении
+### что не успел реализовать: Поддержку скобок в выражении. 
